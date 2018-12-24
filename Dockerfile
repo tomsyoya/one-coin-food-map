@@ -5,8 +5,10 @@ ENV APP_ROOT /app
 WORKDIR $APP_ROOT
 
 # 最低限のものをinstall
-RUN apt-get update &&  apt-get install -y nodejs build-essential --no-install-recommends && \
+RUN apt-get update && apt-get install -y nodejs build-essential --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /usr/local/share/mkcert
 
 RUN gem install bundler
 # image内にbundle installするためGemfileをコピーする
@@ -24,5 +26,5 @@ RUN bundle install && \
 # ポートのエクスポート
 EXPOSE  3000
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+#CMD ["rails", "server", "-b", "0.0.0.0"]
 

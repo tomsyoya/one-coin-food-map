@@ -12,9 +12,11 @@ services:
       - "5432:5432"
   web:
     build: .
-    command: /bin/sh -c "rm -f /app/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    #command: /bin/sh -c "rm -f /app/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: /bin/sh -c "rm -f /app/tmp/pids/server.pid && bundle exec thin start --ssl -p 3000"
     volumes:
-            - .:/app:cached
+      - .:/app:cached
+      - /home/vagrant/.local/share/mkcert:/usr/local/share/mkcert
     ports:
       - "3000:3000"
     depends_on:
