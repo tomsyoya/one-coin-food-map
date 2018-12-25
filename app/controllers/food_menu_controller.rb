@@ -26,7 +26,7 @@ class FoodMenuController < ApplicationController
     end
     result = ""
     message = ""
-    # 例外処理の開始
+    
     begin
       # responseの値に応じて処理を分ける
       case response
@@ -41,7 +41,7 @@ class FoodMenuController < ApplicationController
       else
         message = "HTTP ERROR: code=#{response.code} message=#{response.message}"
       end
-    # エラー時処理
+  
     rescue IOError => e
       message = "e.message"
     rescue TimeoutError => e
@@ -51,7 +51,7 @@ class FoodMenuController < ApplicationController
     rescue => e
       message = "e.message"
     ensure
-      redirected_to food_menu_show_path, food_map: result, message: message
+      redirect_to food_menu_show_path, food_map: result, message: message
     end
   end
 
