@@ -3,12 +3,14 @@
 <head>
 <meta charset=utf-8>
 
-<title>Geolocation API　サンプル</title>
+<title>Geolocation API サンプル</title>
 </head>
 <body>
-<p>あなたの現在位置</p>
+<p>あなたの近くの検索結果</p>
 <div id="food_map">
-<%= params[:location] %>
+<%= @food_map["shop"][0] %>
+<%= @message %>
 </div>
+<div id="error_message"></div>
 </body>
 </html>

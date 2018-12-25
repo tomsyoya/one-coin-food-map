@@ -2,9 +2,10 @@
   <div class="row">
     <div class="col-md-8 food-search-form">
         <h3>近くのワンコイン飯を探しましょう！</h3>
-        <div class="search-btn-div">
-          <%= link_to '近くのワンコイン飯を探す', food_menu_show_path, class:"search-btn btn btn-info" %> 
+        <div>
+          <input type="button" name="search-food" value="近くのご飯を探す" onClick="getFoodInfo()">
         </div>
     </div>
+    <div id="error_message"></div>
   </div>
 </div>

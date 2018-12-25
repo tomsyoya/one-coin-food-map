@@ -5,15 +5,14 @@ class FoodMenuController < ApplicationController
 
   def search
     #ブラウザから現在地の緯度/経度を取得
-    location_data = JSON.parse(params[:geo_location])
+    lat = params[:latitude]
+    lng = params[:longitude]
 
     # 現在地からお店情報を取得するクエリを作成
-    latitude_code = "lat=" + location_data.latitude
-    longitude_code = "lng=" + location_data.longitude
-    query = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=7991055f07ed4925"
-    query += "&" + latitude_code
-    query += "&" + longitude_code
-
+    query = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=7991055f07ed4925&format=json"
+    query += "&lat=" + lat
+    query += "&lng=" + lng
+    
     uri = URI.parse(query)
 
     #クエリ実行
@@ -25,7 +24,8 @@ class FoodMenuController < ApplicationController
       
       http.get(uri.request_uri)
     end
-
+    result = ""
+    message = ""
     # 例外処理の開始
     begin
       # responseの値に応じて処理を分ける
@@ -34,30 +34,32 @@ class FoodMenuController < ApplicationController
       when Net::HTTPSuccess
         # responseのbody要素をJSON形式で解釈し、hashに変換
         result = JSON.parse(response.body)
-        redirect_to food_menu_show(location: result)
       # 別のURLに飛ばされた場合
       when Net::HTTPRedirection
-        @message = "Redirection: code=#{response.code} message=#{response.message}"
+        message = "Redirection: code=#{response.code} message=#{response.message}"
       # その他エラー
       else
-        @message = "HTTP ERROR: code=#{response.code} message=#{response.message}"
+        message = "HTTP ERROR: code=#{response.code} message=#{response.message}"
       end
     # エラー時処理
     rescue IOError => e
-      @message = "e.message"
+      message = "e.message"
     rescue TimeoutError => e
-      @message = "e.message"
+      message = "e.message"
     rescue JSON::ParserError => e
-      @message = "e.message"
+      message = "e.message"
     rescue => e
-      @message = "e.message"
+      message = "e.message"
+    ensure
+      redirected_to food_menu_show_path, food_map: result, message: message
     end
-    
-  end
-  
-  def show
   end
 
+  def show
+    @food_map = params[:food_map]
+    @message = params[:message]
+  end
+  
   def index
   end
 end

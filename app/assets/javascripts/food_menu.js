@@ -4,16 +4,21 @@
 
 //***** ユーザーの現在の位置情報を取得 *****
 function successCallback(position) {
-  var geo_locations = {
-    latitude : position.coords.latitude,
-    longitude : position.coords.longitude
-  };
-  return geo_locations;
-//   var gl_text = "緯度：" + position.coords.latitude + "<br>";
-//     gl_text += "経度：" + position.coords.longitude + "<br>";
-//     gl_text += "緯度・経度の誤差：" + position.coords.accuracy + "<br>";
-//     gl_text += "方角：" + position.coords.heading + "<br>";
-//  document.getElementById("food_map").innerHTML = gl_text;
+
+ var lat = position.coords.latitude;
+ var long = position.coords.longitude;
+
+ $.ajax({
+   url: '/food_menu/search',  
+   type: 'POST',
+   dataType: 'html',
+   // 非同期ならtrue、同期ならfalse。
+   async: true,
+   data: {
+     latitude: lat,
+     longitude: long
+   },
+ });
 }
 
 //***** 位置情報が取得できない場合 ******
@@ -31,22 +36,9 @@ function errorCallback(error) {
       err_msg = "タイムアウトしました";
       break;
   }
-  return err_msg;
-  // document.getElementById("food_map").innerHTML = error.message;
+  document.getElementById("error_message").innerHTML = err_msg;
 }
 
-$(function(){
-    $('.search-btn').click(function() { 
-      var locations = navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-      $.ajax({
-        url: '/food_menu/search',  
-        type: 'POST',
-        dataType: 'json',
-        // 非同期ならtrue、同期ならfalse。
-        async: true,
-        data: {
-          geo_location: locations
-        },
-      });
-   });
- });
+function getFoodInfo(){
+  navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+}
