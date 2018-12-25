@@ -1,24 +1,32 @@
-# README
+# ワンコイン飯検索アプリ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## overview
+自分の位置情報からワンコインで食事できるお店を即座に検索できるアプリです。
 
-Things you may want to cover:
 
-* Ruby version
+機能は以下の通り
 
-* System dependencies
+- ブラウザを使用した現在位置情報の取得
+- 現在位置に基づいたお店情報の検索
+- ログインユーザーによるお店のお気に入り機能
 
-* Configuration
+## How To Use
+※dockerクライアントがインストールされていることを前提としています。
+### 任意の場所にダウンロード
 
-* Database creation
+```
+$ git clone git@github.com:tomsyoya/one-coin-food-map.git
+$ cd one-coin-food-map
+```
 
-* Database initialization
+### 必要なパッケージのインストール
 
-* How to run the test suite
+```
+$ docker-compose build
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### アプリケーションの起動
 
-* Deployment instructions
-
-* ...
+```
+$ docker-compose up -d
+```
