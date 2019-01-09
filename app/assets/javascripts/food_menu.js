@@ -11,7 +11,7 @@ function successCallback(position) {
  $.ajax({
    url: '/food_menu/search',  
    type: 'POST',
-   dataType: 'html',
+   dataType: 'js',
    // 非同期ならtrue、同期ならfalse。
    async: true,
    data: {
@@ -24,6 +24,7 @@ function successCallback(position) {
 //***** 位置情報が取得できない場合 ******
 function errorCallback(error) {
   var err_msg = "";
+
   switch(error.code)
   {
     case 1:
