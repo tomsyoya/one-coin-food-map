@@ -5,19 +5,29 @@
 //***** ユーザーの現在の位置情報を取得 *****
 function successCallback(position) {
 
- var lat = position.coords.latitude;
- var long = position.coords.longitude;
+ let lat = "&lat=" + position.coords.latitude;
+ let long = "&lng=" + position.coords.longitude;
+ const format = "&format=" + "jsonp"; 
+ const access_key = gon.hotpepper_access_key;
+ const url = "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=" 
+              + access_key 
+              + format
+              + lat 
+              + long;
 
  $.ajax({
-   url: '/food_menu/search',  
-   type: 'POST',
-   dataType: 'js',
+   url: url,  
+   type: 'GET',
+   dataType: "jsonp",
    // 非同期ならtrue、同期ならfalse。
    async: true,
-   data: {
-     latitude: lat,
-     longitude: long
-   },
+   timespan:1000
+ }).done(function(data,status,requestXML){
+   console.log(data.results.shop)
+ }).fail(function(jqXHR, textStatus, errorThrown){
+   console.log(jqXHR);
+   console.log(textStatus);
+   console.log(errorThrown);
  });
 }
 

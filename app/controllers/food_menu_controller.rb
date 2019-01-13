@@ -1,6 +1,7 @@
 class FoodMenuController < ApplicationController
 
   def top
+    gon.hotpepper_access_key = ENV["HOTPEPPER_ACCESS_KEY"]
   end
 
   def search
@@ -33,7 +34,6 @@ class FoodMenuController < ApplicationController
       message = "e.message"
     ensure
       p "Reached ensure block!"
-      render :js => "window.location = '/food_menu/show'"
     end
   end
 
