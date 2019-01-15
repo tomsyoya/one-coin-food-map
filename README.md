@@ -15,14 +15,19 @@
 ### 任意の場所にダウンロード
 
 ```
-$ git clone git@github.com:tomsyoya/one-coin-food-map.git
-$ cd one-coin-food-map
+$ git clone git@github.com:tomsyoya/one-coin-food-map.git .
 ```
 
-### 必要なパッケージのインストール
+### 必要なパッケージのインストール & Dockerイメージの構築
 
 ```
 $ docker-compose build
+```
+
+### DBの構築
+
+```
+$ docker-compose run --rm web db:create
 ```
 
 ### アプリケーションの起動
