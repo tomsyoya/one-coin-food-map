@@ -63,7 +63,7 @@ var map;
 
 //***** 現在地付近のマップを描画する *****
 function renderBaseMap(lat, lng){
-  let coordinates = {lat: lat, lng: lng};
+  let coordinates = {lat: Number(lat), lng: Number(lng)};
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16, //地図の縮尺を1〜21で設定数が大きいほど拡大する
     center: coordinates //現在地をマップの中心地として設定
@@ -82,8 +82,8 @@ function renderFoodIcons(data){
   let bounds = new google.maps.LatLngBounds(); 
 
   for(var i = 0; i < data.length; i++){
-    let latitude = Number.parseFloat(data[i].lat);
-    let longtitude = Number.parseFloat(data[i].lng);
+    let latitude = Number(data[i].lat);
+    let longtitude = Number(data[i].lng);
     let coordinates = {lat: latitude, lng: longtitude}
     let title = data[i].name;
     let icon = data[i].logo_image;
