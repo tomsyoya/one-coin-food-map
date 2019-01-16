@@ -8,6 +8,9 @@
     </div>
     <div id="error_message"></div>
     <div id="map"></div>
+    <script>
+       document.getElementById("map").style.display ="block";
+    </script>
     <script async defer src="food_menu.js" type="type/javascript"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_MAP_ACCESS_KEY"]%>&callback=renderBaseMap"type="text/javascript"></script>
   </div>
