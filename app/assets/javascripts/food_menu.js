@@ -37,7 +37,7 @@ function successCallback(position) {
    console.log(errorThrown);
  });
 
-//  document.getElementById("map").style.visibility="visible";
+ 
 }
 
 //***** 位置情報の取得に失敗した場合  ******
@@ -64,7 +64,8 @@ var map;
 //***** 現在地付近のマップを描画する *****
 function renderBaseMap(lat, lng){
   let coordinates = {lat: Number(lat), lng: Number(lng)};
-  map = new google.maps.Map(document.getElementById('map'), {
+  const mapElement = document.getElementById('map');
+  map = new google.maps.Map(mapElement, {
     zoom: 16, //地図の縮尺を1〜21で設定数が大きいほど拡大する
     center: coordinates //現在地をマップの中心地として設定
   });
@@ -75,6 +76,13 @@ function renderBaseMap(lat, lng){
     map: map,
     title: "現在地" //マウスオーバーした際の表示文字
   });
+  if(mapElement.style.display=="block"){
+    // noneで非表示
+    mapElement.style.display ="none";
+  }else{
+    // blockで表示
+    mapElement.style.display ="block";
+  }
 }
 
 function renderFoodIcons(data){
