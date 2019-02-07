@@ -5,7 +5,7 @@ class FoodMenuController < ApplicationController
   end
 
   def search
-    
+    puts params
   end
 
   def show

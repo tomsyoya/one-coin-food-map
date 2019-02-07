@@ -3,15 +3,18 @@
     <div class="col-md-8 food-search-form">
         <h3>近くのワンコイン飯を探しましょう！</h3>
         <div>
-          <input type="button" name="search-food" value="近くのご飯を探す" onClick="getFoodInfo()">
+          <%= form_with url: food_menu_search_path do |form| %>
+            <%= form.hidden_field :lat, :value => "" %>
+            <%= form.hidden_field :long, :value => "" %>
+            <input type="button" name="search-food" value="近くのご飯を探す" onClick="getFoodInfo()">
+          <% end %>
         </div>
     </div>
     <div id="error_message"></div>
     <div id="map"></div>
     <script>
        document.getElementById("map").style.display ="block";
+       window.onload = getCurrentLocation();
     </script>
-    <script async defer src="food_menu.js" type="type/javascript"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_MAP_ACCESS_KEY"]%>&callback=renderBaseMap"type="text/javascript"></script>
   </div>
 </div>
