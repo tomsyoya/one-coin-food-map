@@ -3,10 +3,10 @@
     <div class="col-md-8 food-search-form">
         <h3>近くのワンコイン飯を探しましょう！</h3>
         <div>
-          <%= form_with url: food_menu_search_path do |form| %>
+          <%= form_with url: food_menu_search_path, method: :post do |form| %>
             <%= form.hidden_field :lat, :value => "" %>
             <%= form.hidden_field :long, :value => "" %>
-            <input type="button" name="search-food" value="近くのご飯を探す" onClick="getFoodInfo()">
+            <%= form.submit "近くのご飯を探す" %>
           <% end %>
         </div>
     </div>
@@ -14,7 +14,7 @@
     <div id="map"></div>
     <script>
        document.getElementById("map").style.display ="block";
-       window.onload = getCurrentLocation();
+       window.onload = getCurrentLocation(); //画面読み込み時に位置情報を取得
     </script>
   </div>
 </div>

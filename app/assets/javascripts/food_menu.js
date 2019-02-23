@@ -1,7 +1,4 @@
 //***** ユーザーの現在の位置情報を取得 *****
-function getFoodInfo(){
-  navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-}
 
 function getCurrentLocation(){
   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -110,10 +107,12 @@ function renderFoodIcons(data){
 //// const lat = position.coords.latitude;
 //// const long = position.coords.longitude;
 //// const format = "&format=" + "jsonp";
+//// const isLunchMenu = "&lunch=1";
 //// const access_key = gon.hotpepper_access_key;
 //// const url = "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key="
 ////              + access_key
 ////              + format
+////              + isLunchMenu
 ////              + "&lat=" + lat
 ////              + "&lng=" + long;
 //// $.ajax({
@@ -132,6 +131,4 @@ function renderFoodIcons(data){
 ////   console.log(textStatus);
 ////   console.log(errorThrown);
 //// });
-////
-////
 ////}
